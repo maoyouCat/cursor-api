@@ -43,7 +43,6 @@ app.post('/v1/chat/completions', async (req, res) => {
     // 获取checksum，req header中传递优先，环境变量中的等级第二，最后随机生成
     const checksum =
       req.headers['x-cursor-checksum'] ??
-      process.env['x-cursor-checksum'] ??
       `zo${getRandomIDPro({ dictType: 'max', size: 6 })}${getRandomIDPro({ dictType: 'max', size: 64 })}/${getRandomIDPro({ dictType: 'max', size: 64 })}`;
 
     const response = await fetch('https://api2.cursor.sh/aiserver.v1.AiService/StreamChat', {
